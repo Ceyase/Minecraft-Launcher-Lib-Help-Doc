@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>开始入门 - Minecraft Launcher Lib帮助文档</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Minecraft Launcher Lib帮助文档</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">简介</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../%E5%AE%89%E8%A3%85/" class="nav-link">安装</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">教程 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active">开始入门</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../%E5%AE%89%E8%A3%85/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#_1" class="nav-link">开始入门</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#minecraft" class="nav-link">Minecraft根目录</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#minecraft_1" class="nav-link">安装Minecraft</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#get-minecraft-versions" class="nav-link">Get Minecraft Versions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#launch-minecraft" class="nav-link">Launch Minecraft</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="_1">开始入门</h1>
+<p>文档的第一篇将介绍如何安装和运行Minecraft。这里跳过了微软登录。</p>
+<h2 id="minecraft">Minecraft根目录</h2>
+<p>想要开始使用MLL库，我们首先需要一个.minecraft目录。我们可以新建一个Minecraft目录或者使用默认目录。您可以使用minecraft_launcher_lib.utils.get_minecraft_directory()获取默认目录。</p>
+<pre><code># 获取您系统的默认Minecraft目录
+minecraft_directory = minecraft_launcher_lib.utils.get_minecraft_directory()
+# 或者你也可以使用你自己的目录
+# minecraft_directory = &quot;路径/到/你的/.minecraft/文件夹&quot;
+# 比如
+minecraft_directory = &quot;D:/PCL/.minecraft&quot;
+</code></pre>
+<h2 id="minecraft_1">安装Minecraft</h2>
+<p>在你启动Minecraft之前，你需要先安装它. 这可以使用<code>install_minecraft_version</code>命令完成. Let’s say we want to install Version 1.17 in our Minecraft Directory.</p>
+<pre><code>minecraft_launcher_lib.install.install_minecraft_version(&quot;1.17&quot;, minecraft_directory)
+</code></pre>
+<p>To get the information how to install Minecraft, minecraft-launcher-lib looks first for a JSON file in your Minecraft Directory. In the case of 1.17 it’s minecraft_directory/versions/1.17/1.17.json. This allows installing moded versions that are not official from Mojang. If the JSON file not does exists minecraft-launcher-lib tries to download it from the Mojang Servers. install_minecraft_version ensures that the Minecraft installation is correct, so you need to call it every time before you launch Minecraft, even if you had the version already installed.</p>
+<h2 id="get-minecraft-versions">Get Minecraft Versions</h2>
+<p>If you don’t want to start a single version like 1.17 every time you need a list of all Minecraft version. To get that list use minecraft_launcher_lib.utils.get_available_versions(minecraft_directory). It returns this list:</p>
+<pre><code>[
+    {
+        &quot;id&quot;: &quot;some_id&quot;,
+        &quot;type&quot;: &quot;release&quot;
+    },
+    {
+        &quot;id&quot;: &quot;some_other_id&quot;,
+        &quot;type&quot;: &quot;snapshot&quot;
+    }
+]
+</code></pre>
+<p>The id is the Minecraft version that can be used as argument for install_minecraft_version and other versions. The type says what type the version is. Possible values are: release, snapshot, beta, alpha.</p>
+<p>To get the latest version, use get_latest_version().</p>
+<pre><code>latest_release = minecraft_launcher_lib.utils.get_latest_version()[&quot;release&quot;]
+latest_snapshot = minecraft_launcher_lib.utils.get_latest_version()[&quot;snapshot&quot;]
+</code></pre>
+<h2 id="launch-minecraft">Launch Minecraft</h2>
+<p>Since you know how to install Minecraft, it’s now time to start it. First we need a dict with all options. The minimal options dict is this:</p>
+<pre><code>{
+    &quot;username&quot;: &quot;The Username&quot;,
+    &quot;uuid&quot;: &quot;The UUID&quot;,
+    &quot;token&quot;: &quot;The acces token&quot;
+}
+</code></pre>
+<p>The Username and UUID belongs to a Account. Since Name and UUID are public, the Token is used to log in. The token is generated every time when a User logs in with his Microsoft Account. Minecraft can be launched with a not existing user and a wrong token. This can be used for test cases. minecraft-launcher-lib allows creating a dict with a test user.</p>
+<pre><code>options = minecraft_launcher_lib.utils.generate_test_options()
+</code></pre>
+<p>We use the test options here to keep it simple. The login with Microsoft comes latter. Keep in mind that publishing a Launcher which allows User who haven’t bought Minecraft to play is illegal, so use this only for test cases in development. You can add more options to the dict like the resolution, but this is not needed to launch.</p>
+<p>Now we have the options, we need to get the Minecraft command. In this case for Version 1.17.</p>
+<pre><code>minecraft_command = minecraft_launcher_lib.command.get_minecraft_command(&quot;1.17&quot;, minecraft_directory, options)
+</code></pre>
+<p>The command that your get is a list of strings that can be used to run Minecraft e.g. with the subprocess module.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
